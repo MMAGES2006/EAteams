@@ -1,0 +1,7 @@
+{
+  "name": "EAteams",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "angular-standalone"
+}
