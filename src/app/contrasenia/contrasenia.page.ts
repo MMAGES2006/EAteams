@@ -16,6 +16,7 @@ import { Auth } from '@angular/fire/auth';
 })
 export class ContraseniaPage implements OnInit {
 
+
   constructor(private alertController: AlertController, private router: Router, private authService: AuthService) { }
 
   ngOnInit() {
@@ -26,7 +27,7 @@ export class ContraseniaPage implements OnInit {
 
   async onSubmit() {
     try {
-      await this.authService.register(this.email, this.password);
+      await this.authService.resetPassword(this.email);
       const alert = await this.alertController.create({
         header: 'Signup Success',
         message: 'You have created successfully',
@@ -43,12 +44,13 @@ export class ContraseniaPage implements OnInit {
       await alert.present();
     }
   }
+
   validateEmail(email: string): boolean {
     const emailPattern = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
     return emailPattern.test(email);
   }
 
   onSignUp() {
-    this.router.navigateByUrl("home")
+    this.router.navigateByUrl("login")
   }
 }
