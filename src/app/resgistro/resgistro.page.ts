@@ -49,7 +49,7 @@ export class ResgistroPage implements OnInit {
   }
 
   onSignUp() {
-    this.router.navigateByUrl("registro")
+    this.router.navigateByUrl("home")
   }
 }
 
