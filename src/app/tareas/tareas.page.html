@@ -5,9 +5,33 @@
 </ion-header>
 
 <ion-content [fullscreen]="true">
-  <ion-header collapse="condense">
-    <ion-toolbar>
-      <ion-title size="large">tareas</ion-title>
-    </ion-toolbar>
-  </ion-header>
+  <div *ngIf="!isAdding && !isEditing">
+    <h2>Lista de Tareas</h2>
+    <ul>
+      <li *ngFor="let task of tasks">
+        <div>
+          <input type="checkbox" [(ngModel)]="task.completed" (change)="toggleCompletion(task)" />
+          {{ task.title }}
+          <button (click)="editTask(task)">Editar</button>
+          <button (click)="deleteTask(task.id!)">Eliminar</button>
+        </div>
+      </li>
+    </ul>
+    <button (click)="isAdding = true">Agregar tarea</button>
+  </div>
+  
+  <div *ngIf="isAdding">
+    <h2>Agregar nueva tarea</h2>
+    <input [(ngModel)]="newTaskTitle" type="text" placeholder="Título de la tarea" />
+    <button (click)="addTask()">Agregar</button>
+    <button (click)="cancel()">Cancelar</button>
+  </div>
+  
+  <div *ngIf="isEditing && currentTask">
+    <h2>Editar tarea</h2>
+    <input [(ngModel)]="currentTask.title" type="text" placeholder="Título de la tarea" />
+    <input [(ngModel)]="currentTask.completed" type="checkbox" /> Completada
+    <button (click)="saveTask()">Guardar</button>
+    <button (click)="cancel()">Cancelar</button>
+  </div>
 </ion-content>
